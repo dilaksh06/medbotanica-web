@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+/* MedBotanica Theme CSS Variables */
+:root {
+  /* Colors from theme.ts - light mode */
+  --color-primary: #2E7D32;
+  --color-primary-light: #4CAF50;
+  --color-primary-dark: #1B5E20;
+
+  --color-secondary: #81C784;
+  --color-secondary-light: #A5D6A7;
+  --color-secondary-dark: #66BB6A;
+
+  --color-accent: #C8E6C9;
+  --color-accent-light: #E8F5E9;
+
+  --color-background: #F1F8F5;
+  --color-background-alt: #FAFAFA;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FEFEFE;
+
+  --color-text-primary: #1B5E20;
+  --color-text-secondary: #4E6E5D;
+  --color-text-tertiary: #757575;
+  --color-text-muted: #BDBDBD;
+  --color-text-inverse: #FFFFFF;
+  --color-text-placeholder: #9E9E9E;
+
+  --color-success: #388E3C;
+  --color-warning: #FF9800;
+  --color-error: #D32F2F;
+  --color-info: #2196F3;
+
+  --color-border: #C8E6C9;
+  --color-border-light: #E8F5E9;
+
+  /* Shadows */
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+
+  /* Interactive States */
+  --color-focus: #2E7D32;
+  --color-disabled: #F5F5F5;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Dark mode overrides */
+    --color-primary: #4CAF50;
+    --color-primary-light: #81C784;
+    --color-primary-dark: #1B5E20;
+
+    --color-secondary: #A5D6A7;
+    --color-secondary-light: #C8E6C9;
+    --color-secondary-dark: #66BB6A;
+
+    --color-accent: #2E7D32;
+    --color-accent-light: #4CAF50;
+
+    --color-background: #0a0a0a;
+    --color-background-alt: #171717;
+    --color-surface: #1B1B1B;
+    --color-surface-elevated: #222222;
+
+    --color-text-primary: #ededed;
+    --color-text-secondary: #BDBDBD;
+    --color-text-tertiary: #9E9E9E;
+    --color-text-muted: #757575;
+    --color-text-inverse: #1B1B1B;
+    --color-text-placeholder: #4E6E5D;
+
+    --color-success: #81C784;
+    --color-warning: #FFB74D;
+    --color-error: #F44336;
+    --color-info: #64B5F6;
+
+    --color-border: #4E6E5D;
+    --color-border-light: #2E7D32;
+
+    --shadow-light: rgba(255, 255, 255, 0.1);
+    --shadow-medium: rgba(255, 255, 255, 0.15);
+
+    --color-focus: #81C784;
+    --color-disabled: #2E7D32;
   }
 }
 
+/* Global styles */
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
   font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
 }
+
+/* You can add custom classes referencing CSS vars, e.g.: */
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+/* ...and more utility classes as needed */
