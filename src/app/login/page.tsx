@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -11,9 +12,10 @@ export default function LoginPage() {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // TODO: Replace this with real auth logic (API call, Firebase, etc)
+    // Fake login for now
     if (email === "abc@gmail.com" && password === "abc123") {
-      // On successful login, redirect to home page
+      // Save token in cookies
+      Cookies.set("authToken", "mysecrettoken", { expires: 1 }); // expires in 1 day
       router.push("/home");
     } else {
       alert("Invalid credentials, please try again.");

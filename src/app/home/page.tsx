@@ -1,11 +1,28 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { User, LogOut, Image as ImageIcon, Search } from "lucide-react";
 
 export default function HomePage() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const router = useRouter();
+
+  // ✅ Protect Home Page (redirect to login if not logged in)
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn !== "true") {
+      router.replace("/login");
+    }
+  }, [router]);
+
+  // ✅ Logout
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    router.push("/login");
+  };
 
   // Open file selector
   const openFileSelector = () => {
@@ -39,20 +56,46 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-green-900 via-green-800 to-green-600 text-white flex flex-col items-center px-6 py-12">
-      {/* Header */}
-      <header className="text-center mb-12">
-        <div className="flex justify-center items-center gap-3 mb-2">
-          <span className="text-5xl">🌿</span>
-          <h1 className="text-4xl font-extrabold tracking-wide">MedBotanica</h1>
+    <main className="min-h-screen bg-gradient-to-b from-green-900 via-green-800 to-green-600 text-white flex flex-col items-center px-6 py-6">
+      {/* ✅ Top Navbar */}
+      <nav className="w-full flex justify-between items-center mb-8 px-4">
+        <h1 className="text-2xl font-bold tracking-wide flex items-center gap-2">
+          🌿 MedBotanica
+        </h1>
+        <div className="flex gap-4">
+          {/* Profile */}
+          <button
+            onClick={() => router.push("/profile")}
+            className="bg-green-700 hover:bg-green-800 transition rounded-full w-10 h-10 flex items-center justify-center"
+            title="Profile"
+          >
+            <User className="w-5 h-5" />
+          </button>
+
+          {/* Logout */}
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 hover:bg-red-700 transition rounded-full w-10 h-10 flex items-center justify-center"
+            title="Logout"
+          >
+            <LogOut className="w-5 h-5" />
+          </button>
         </div>
-        <p className="text-sm opacity-90">AI-Powered Herbal Plant Identification</p>
+      </nav>
+
+      {/* Header */}
+      <header className="text-center mb-10">
+        <p className="text-sm opacity-90">
+          AI-Powered Herbal Plant Identification
+        </p>
       </header>
 
       {/* Image Upload Section */}
       <section className="bg-white rounded-3xl p-6 max-w-lg w-full text-green-900 shadow-lg mb-10">
         <h2 className="text-2xl font-semibold mb-1">Upload Plant Image</h2>
-        <p className="mb-6 text-green-700">Take a clear photo or select from your device</p>
+        <p className="mb-6 text-green-700">
+          Take a clear photo or select from your device
+        </p>
 
         <div className="mb-6 rounded-xl border-4 border-green-200 bg-green-50 relative h-72 flex justify-center items-center overflow-hidden">
           {selectedImage ? (
@@ -72,7 +115,7 @@ export default function HomePage() {
             </>
           ) : (
             <div className="flex flex-col items-center opacity-60 select-none">
-              <span className="text-7xl mb-3">📸</span>
+              <ImageIcon className="w-16 h-16 mb-3" />
               <p>No image selected</p>
               <p className="text-sm mt-1">Choose an option below</p>
             </div>
@@ -92,15 +135,8 @@ export default function HomePage() {
             onClick={openFileSelector}
             className="flex-1 bg-green-700 hover:bg-green-800 transition rounded-xl py-3 flex justify-center items-center gap-3 text-white font-semibold"
           >
-            🖼️ Gallery
+            <ImageIcon className="w-5 h-5" /> Gallery
           </button>
-          {/* Camera capture on web requires more setup — we omit or add later */}
-          {/* <button
-            onClick={handleCaptureFromCamera}
-            className="flex-1 bg-green-700 hover:bg-green-800 transition rounded-xl py-3 flex justify-center items-center gap-3 text-white font-semibold"
-          >
-            📷 Camera
-          </button> */}
         </div>
       </section>
 
@@ -119,11 +155,11 @@ export default function HomePage() {
         >
           {isAnalyzing ? (
             <>
-              <span className="animate-spin">🔍</span> Analyzing Plant...
+              <Search className="w-5 h-5 animate-spin" /> Analyzing Plant...
             </>
           ) : (
             <>
-              <span>🌱</span> Identify Plant
+              <Search className="w-5 h-5" /> Identify Plant
             </>
           )}
         </button>
