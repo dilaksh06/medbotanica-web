@@ -167,7 +167,8 @@ export default function HomePage() {
 
       {/* Features Info */}
       <section className="max-w-lg w-full bg-white rounded-3xl p-6 text-green-900 shadow-lg">
-        <h3 className="text-xl font-semibold mb-4">What you'll get:</h3>
+        <h3 className="text-xl font-semibold mb-4">What you&#39;ll get:</h3>
+
         <ul className="space-y-3">
           {[
             ["🏷️", "Plant identification with scientific name"],
