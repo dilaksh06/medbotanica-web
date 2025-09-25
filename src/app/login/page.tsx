@@ -13,9 +13,10 @@ export default function LoginPage() {
     e.preventDefault();
 
     // Fake login for now
-    if (email === "abc@gmail.com" && password === "abc123") {
+    if (true) {
       // Save token in cookies
       Cookies.set("authToken", "mysecrettoken", { expires: 1 }); // expires in 1 day
+        localStorage.setItem("isLoggedIn", "true");
       router.push("/home");
     } else {
       alert("Invalid credentials, please try again.");
